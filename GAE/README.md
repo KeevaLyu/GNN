@@ -20,3 +20,7 @@ This repository implements variational graph auto-encoder by Thomas Kipf. For de
 * Train accuracy, validation(test) average precision, auroc are similar to those of the original. (over 90% for both AP and roc) 
 * Dropout is not implemented now.
 * Feel free to report some inefficiencies in the code! (It's just initial version so may have much room for pytorch-adaptation)
+
+# Cite
+
+[pytorch implementation](https://github.com/DaehanKim/vgae_pytorch)
