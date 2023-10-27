@@ -83,7 +83,6 @@ Installation
 
 Citing
 ------
-The paper:
     @inproceedings{Perozzi:2014:DOL:2623330.2623732,
      author = {Perozzi, Bryan and Al-Rfou, Rami and Skiena, Steven},
      title = {DeepWalk: Online Learning of Social Representations},
