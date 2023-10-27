@@ -1,0 +1,10 @@
+gensim>=4.0.0
+networkx
+joblib
+fastdtw
+tqdm
+numpy
+scikit-learn
+pandas
+matplotlib
+deepctr
