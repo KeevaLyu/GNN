@@ -22,5 +22,5 @@ This repository implements variational graph auto-encoder by Thomas Kipf. For de
 * Feel free to report some inefficiencies in the code! (It's just initial version so may have much room for pytorch-adaptation)
 
 # Cite
-
-[pytorch implementation](https://github.com/DaehanKim/vgae_pytorch)
+The code:
+  https://github.com/DaehanKim/vgae_pytorch
