@@ -9,7 +9,7 @@ Thomas Kipf, [Graph Convolutional Networks](http://tkipf.github.io/graph-convolu
 
 ![Graph Convolutional Networks](figure.png)
 
-Note: There are subtle differences between the TensorFlow implementation in https://github.com/tkipf/gcn and the PyTorch re-implementation in https://github.com/tkipf/pygcn.git. 
+Note: There are subtle differences between the TensorFlow implementation in https://github.com/tkipf/gcn and the PyTorch re-implementation in https://github.com/tkipf/pygcn. 
 
 This re-implementation serves as a proof of concept and is not intended for reproduction of the results reported in [1].
 
