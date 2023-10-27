@@ -83,8 +83,7 @@ Installation
 
 Citing
 ------
-If you find DeepWalk useful in your research, we ask that you cite the following paper::
-
+The paper:
     @inproceedings{Perozzi:2014:DOL:2623330.2623732,
      author = {Perozzi, Bryan and Al-Rfou, Rami and Skiena, Steven},
      title = {DeepWalk: Online Learning of Social Representations},
@@ -102,6 +101,9 @@ If you find DeepWalk useful in your research, we ask that you cite the following
      address = {New York, NY, USA},
      keywords = {deep learning, latent representations, learning with partial labels, network classification, online learning, social networks},
     } 
+
+The code:
+    https://github.com/phanein/deepwalk
 
 Misc
 ----
