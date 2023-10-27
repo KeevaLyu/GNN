@@ -103,7 +103,7 @@ The paper::
      keywords = {deep learning, latent representations, learning with partial labels, network classification, online learning, social networks},
     } 
 
-The code::
+The code:
 
     https://github.com/phanein/deepwalk
 
