@@ -3,9 +3,7 @@ Graph Convolutional Networks in PyTorch
 
 PyTorch implementation of Graph Convolutional Networks (GCNs) for semi-supervised classification [1].
 
-For a high-level introduction to GCNs, see:
-
-Thomas Kipf, [Graph Convolutional Networks](http://tkipf.github.io/graph-convolutional-networks/) (2016)
+For a high-level introduction to GCNs, see: Thomas Kipf, [Graph Convolutional Networks](http://tkipf.github.io/graph-convolutional-networks/) (2016)
 
 ![Graph Convolutional Networks](figure.png)
 
