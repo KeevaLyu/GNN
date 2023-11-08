@@ -33,7 +33,6 @@ def arg_parse():
     parser.add_argument('--feature', dest='feature_type', help='Feature used for encoder. Can be: id, deg')
     parser.add_argument('--input-dim', dest='input_dim', type=int, help='Input feature dimension')
     parser.add_argument('--hidden-dim', dest='hidden_dim', type=int, help='Hidden dimension')
-    parser.add_argument('--output-dim', dest='output_dim', type=int, help='Output dimension')
     parser.add_argument('--num-classes', dest='num_classes', type=int, help='Number of label classes')
     parser.add_argument('--nobn', dest='bn', action='store_const', const=False, default=True, help='Whether batch normalization is used')
     parser.add_argument('--dropout', dest='dropout', type=float, help='Dropout rate.')
@@ -55,7 +54,6 @@ def arg_parse():
                         num_workers=1,
                         input_dim=10,
                         hidden_dim=64,
-                        output_dim=64,
                         num_classes=2,
                         dropout=0.0,
                         name_suffix=''
