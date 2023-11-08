@@ -46,7 +46,7 @@ class GCN(nn.Module):
         x = F.relu(self.gc1(x, adj))
         x = F.dropout(x, self.dropout, training=self.training)
         x = self.gc2(x, adj)
-        return F.log_softmax(x, dim=1)
+        return F.log_softmax(x, dim=-1)
 
 
 class Pooling(nn.Module):
@@ -56,7 +56,7 @@ class Pooling(nn.Module):
 
     def forward(self, x, adj):
         z = F.relu(self.gc1(x, adj))
-        s = F.log_softmax(z, dim=1)
+        s = F.log_softmax(z, dim=-1)
         X = torch.matmul(s.transpose(1, 2), z)
         A = s.transpose(1, 2) @ adj @ s
         return X, A
@@ -72,7 +72,7 @@ class GCNpooling(nn.Module):
         x1, adj1 = self.pooling1(x, adj)
         z = F.relu(self.gc(x1, adj1))
         z = F.dropout(z, self.dropout, training=self.training)
-        #out = F.log_softmax(z, dim=1)
+        #out = F.log_softmax(z, dim=-1)
         out, _ = torch.max(z, dim=1)
         return out
 
