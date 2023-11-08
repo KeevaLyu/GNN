@@ -42,7 +42,7 @@ def arg_parse():
 
     parser.set_defaults(datadir='data',
                         bmname='DD',
-                        max_nodes=1000,
+                        max_nodes=500,
                         cuda='0',
                         feature_type='default',
                         lr=0.001,
