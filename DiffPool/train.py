@@ -114,11 +114,11 @@ def evaluate(dataset, model, args, name='Validation', max_num_examples=None):
     labels = []
     preds = []
     for batch_idx, data in enumerate(dataset):
-        adj = Variable(data['adj'].float(), requires_grad=False) #.cuda()
-        h0 = Variable(data['feats'].float()) #.cuda()
+        adj = Variable(data['adj'].float(), requires_grad=False).cuda()
+        h0 = Variable(data['feats'].float()).cuda()
         labels.append(data['label'].long().numpy())
         batch_num_nodes = data['num_nodes'].int().numpy()
-        assign_input = Variable(data['assign_feats'].float(), requires_grad=False) #.cuda()
+        assign_input = Variable(data['assign_feats'].float(), requires_grad=False).cuda()
 
         ypred = model(h0, adj, batch_num_nodes, assign_x=assign_input)
         _, indices = torch.max(ypred, 1)
@@ -165,11 +165,11 @@ def train(dataset, model, args, same_feat=True, val_dataset=None, test_dataset=N
         for batch_idx, data in enumerate(dataset):
             begin_time = time.time()
             model.zero_grad()
-            adj = Variable(data['adj'].float(), requires_grad=False) #.cuda()
-            h0 = Variable(data['feats'].float(), requires_grad=False) #.cuda()
-            label = Variable(data['label'].long()) #.cuda()
+            adj = Variable(data['adj'].float(), requires_grad=False).cuda()
+            h0 = Variable(data['feats'].float(), requires_grad=False).cuda()
+            label = Variable(data['label'].long()).cuda()
             batch_num_nodes = data['num_nodes'].int().numpy() if mask_nodes else None
-            assign_input = Variable(data['assign_feats'].float(), requires_grad=False) #.cuda()
+            assign_input = Variable(data['assign_feats'].float(), requires_grad=False).cuda()
 
             ypred = model(h0, adj, batch_num_nodes, assign_x=assign_input)
             if not args.method == 'soft-assign' or not args.linkpred:
@@ -279,7 +279,7 @@ def benchmark_task_val(args, writer=None, feat='node-label'):
         #         args.batch_size,
         #         "meanpool",
         #         int(max_num_nodes * args.assign_ratio),
-        #         args.assign_ratio) #.cuda()
+        #         args.assign_ratio).cuda()
         # elif args.method == 'base-set2set':
         #     print('Method: base-set2set')
         #     model = encoders.GcnSet2SetEncoder(
@@ -303,8 +303,8 @@ def benchmark_task_val(args, writer=None, feat='node-label'):
 def main():
     prog_args = arg_parse()
 
-    #os.environ['CUDA_VISIBLE_DEVICES'] = prog_args.cuda
-    #print('CUDA', prog_args.cuda)
+    os.environ['CUDA_VISIBLE_DEVICES'] = prog_args.cuda
+    print('CUDA', prog_args.cuda)
 
     if prog_args.bmname is not None:
         benchmark_task_val(prog_args)
