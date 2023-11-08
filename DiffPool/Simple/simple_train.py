@@ -20,8 +20,6 @@ def arg_parse():
     io_parser.add_argument('--pkl', dest='pkl_fname', help='Name of the pkl data file')
     benchmark_parser = io_parser.add_argument_group()
     benchmark_parser.add_argument('--bmname', dest='bmname', help='Name of the benchmark dataset')
-    softpool_parser = parser.add_argument_group()
-    softpool_parser.add_argument('--assign-ratio', dest='assign_ratio', type=float, help='ratio of number of nodes in consecutive layers')
     parser.add_argument('--linkpred', dest='linkpred', action='store_const', const=True, default=False, help='Whether link prediction side objective is used')
     parser.add_argument('--datadir', dest='datadir', help='Directory where benchmark is located')
     parser.add_argument('--cuda', dest='cuda', help='CUDA.')
@@ -73,8 +71,6 @@ def evaluate(dataset, model, args, name='Validation', max_num_examples=None):
         adj = Variable(data['adj'].float(), requires_grad=False) #.cuda()
         h0 = Variable(data['feats'].float()) #.cuda()
         labels.append(data['label'].long().numpy())
-        batch_num_nodes = data['num_nodes'].int().numpy()
-        assign_input = Variable(data['assign_feats'].float(), requires_grad=False) #.cuda()
 
         ypred = model(h0, adj)
         _, indices = torch.max(ypred, 1)
@@ -124,8 +120,6 @@ def train(dataset, model, args, val_dataset=None, test_dataset=None, writer=None
             adj = Variable(data['adj'].float(), requires_grad=False) #.cuda()
             h0 = Variable(data['feats'].float(), requires_grad=False) #.cuda()
             label = Variable(data['label'].long()) #.cuda()
-            #batch_num_nodes = data['num_nodes'].int().numpy() if mask_nodes else None
-            #assign_input = Variable(data['assign_feats'].float(), requires_grad=False) #.cuda()
             ypred = model(h0, adj)
             loss = model.loss(ypred, label)
             loss.backward()
@@ -179,11 +173,6 @@ def benchmark_task_val(args, writer=None):
 
     for i in range(10):
         train_dataset, val_dataset, max_num_nodes, input_dim, assign_input_dim = cross_val.prepare_val_data(graphs, args, i, max_nodes=args.max_nodes)
-        # model = encoders.SoftPoolingGcnEncoder(
-        #     max_num_nodes, input_dim, args.hidden_dim, args.output_dim, args.num_classes,
-        #     args.num_gc_layers, args.hidden_dim, assign_ratio=args.assign_ratio, num_pooling=args.num_pool,
-        #     bn=args.bn, dropout=args.dropout, linkpred=args.linkpred, args=args,
-        #     assign_input_dim=assign_input_dim)  # .cuda()
         model = models.GCNpooling(input_dim, args.hidden_dim, args.num_classes, dropout=args.dropout)
         _, val_accs = train(train_dataset, model, args, val_dataset=val_dataset, test_dataset=None, writer=writer)
         all_vals.append(np.array(val_accs))
